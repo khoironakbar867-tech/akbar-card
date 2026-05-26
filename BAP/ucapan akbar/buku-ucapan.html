@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Birthday Card</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Indie+Flower&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-grad-start: #f8cdda;
+        --bg-grad-end: #fce4ec;
+        --card-bg: #fff8f0;
+        --text-dark: #5d5d5d;
+        --text-header: #c08497;
+        --heart-color: #ff4d6d;
+        --button-bg: #c08497;
+        --button-text: #ffffff;
+      }
+
+      body {
+        font-family: "Indie Flower", cursive;
+        background: linear-gradient(
+          135deg,
+          var(--bg-grad-start),
+          var(--bg-grad-end)
+        );
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        overflow: hidden;
+      }
+
+      .card {
+        width: 340px;
+        max-width: 90%;
+        background: var(--card-bg);
+        border-radius: 15px;
+        transform-style: preserve-3d;
+        transform: perspective(2000px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        transition: 1s;
+        position: relative;
+      }
+
+      .card:hover {
+        transform: perspective(2000px) rotate(5deg) scale(1.05);
+      }
+
+      .imgbox {
+        width: 100%;
+        transform-origin: left;
+        transition: 1s;
+        z-index: 10;
+        position: relative;
+      }
+
+      .imgbox img {
+        width: 100%;
+        display: block;
+        border-radius: 15px 0 0 15px;
+      }
+
+      .card:hover .imgbox {
+        transform: rotateY(-135deg);
+      }
+
+      .bark {
+        position: absolute;
+        background: var(--card-bg);
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: 0.5s;
+      }
+
+      .card:hover .bark {
+        opacity: 1;
+      }
+
+      .details {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        padding: 25px;
+        text-align: center;
+      }
+
+      h4 {
+        font-family: "Caveat", cursive;
+        font-size: 35px;
+        color: var(--text-header);
+        margin-bottom: 10px;
+      }
+
+      .recipient-name {
+        font-size: 28px;
+        margin-top: -10px;
+      }
+
+      p {
+        font-size: 15px;
+        color: var(--text-dark);
+        line-height: 1.6;
+        margin: 5px 0;
+      }
+
+      .text-right {
+        text-align: right;
+        margin-top: 15px;
+      }
+
+      .link-button {
+        display: inline-block;
+        background: var(--button-bg);
+        color: white;
+        padding: 10px 18px;
+        border-radius: 25px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        margin-top: 10px;
+      }
+
+      .page {
+        display: none;
+      }
+
+      .page.active {
+        display: block;
+      }
+
+      .hearts {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .heart {
+        position: absolute;
+        color: var(--heart-color);
+        font-size: 22px;
+        animation: fall linear forwards;
+      }
+
+      @keyframes fall {
+        0% {
+          transform: translateY(-10vh);
+          opacity: 1;
+        }
+
+        100% {
+          transform: translateY(110vh);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <audio id="myAudio" autoplay loop>
+      <source src="./hijrahkelondon.mp3" type="audio/mpeg" />
+    </audio>
+
+    <script>
+      window.addEventListener("load", () => {
+        const audio = document.getElementById("myAudio");
+
+        audio.play().catch(() => {
+          console.log("Autoplay diblok browser");
+        });
+      });
+    </script>
+
+    <div class="card">
+      <div class="imgbox">
+        <div class="bark"></div>
+        <img src="gambarawal.png" alt="" />
+      </div>
+
+      <div class="details">
+        <!-- PAGE 1 -->
+        <div class="page active">
+          <h4>Happy Happy Ajalah</h4>
+          <h4 class="recipient-name">akbar ganteng keren mantap</h4>
+
+          <p>Pe Pe Apa!</p>
+          <p>Gokil gua bisa bikin ginian</p>
+          <p>Lu kalo mau templatenya bayar yak</p>
+          <p>Kayanya gua bakal merintis dari sini</p>
+
+          <button class="link-button" onclick="nextPage()">Next ➜</button>
+        </div>
+
+        <!-- PAGE 2 -->
+        <div class="page">
+          <h4>🦋</h4>
+
+          <p>akbar keren mantap ganteng</p>
+          <p>Stay happy always 💕</p>
+          <p>Stay happy always 💕</p>
+          <p>Stay happy always 💕</p>
+
+          <div class="text-right">With Si Ganteng 💌</div>
+
+          <button class="link-button" onclick="prevPage()">⬅ Back</button>
+
+          <br />
+
+          <a class="link-button" href="flower.html"> 🎁 Buka Kado Spesial </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hearts"></div>
+
+    <script>
+      const pages = document.querySelectorAll(".page");
+      let currentPage = 0;
+
+      function showPage(index) {
+        pages.forEach((page) => {
+          page.classList.remove("active");
+        });
+
+        pages[index].classList.add("active");
+      }
+
+      function nextPage() {
+        currentPage = 1;
+        showPage(currentPage);
+      }
+
+      function prevPage() {
+        currentPage = 0;
+        showPage(currentPage);
+      }
+
+      const heartsContainer = document.querySelector(".hearts");
+
+      function createHeart() {
+        const heart = document.createElement("span");
+
+        heart.classList.add("heart");
+        heart.innerHTML = "♥";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = Math.random() * 2 + 3 + "s";
+
+        heartsContainer.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }
+
+      setInterval(createHeart, 300);
+
+      // MUSIC
+      const audio = document.getElementById("myAudio");
+
+      function playMusic() {
+        audio.play();
+      }
+
+      // AUTO PLAY SETELAH INTERAKSI
+      document.body.addEventListener(
+        "click",
+        function () {
+          audio.play().catch(() => {});
+        },
+        { once: true },
+      );
+    </script>
+  </body>
+</html>
